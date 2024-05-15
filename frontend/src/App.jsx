@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Content from './components/Content'
+import Who from './components/Who'
 import HeroSection from './components/HeroSection'
 import Footer from './components/Footer'
 
@@ -12,6 +13,7 @@ function App() {
       <Header/>
       <HeroSection/>
       <Content/>
+      <Who/>
       <Footer/>
     </>
   )
