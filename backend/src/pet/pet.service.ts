@@ -92,7 +92,7 @@ export class PetService {
     }
 
     if(updatePetDto.specie){
-      specie = await this.breedRepository.findOneBy({
+      specie = await this.specieRepository.findOneBy({
         name: updatePetDto.specie
       })
 
@@ -102,7 +102,7 @@ export class PetService {
     }
 
     if(updatePetDto.shelter){
-      shelter = await this.breedRepository.findOneBy({
+      shelter = await this.shelterRepository.findOneBy({
         name: updatePetDto.shelter
       })
 

@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsDate, IsEmail, IsString, MinLength } from "class-validator";
+import { IsDate, IsDateString, IsEmail, IsString, MinLength } from "class-validator";
 
 export class RegisterDto {
   @IsString()
@@ -17,6 +17,7 @@ export class RegisterDto {
   @IsString()
   gender: string;
 
-  @IsDate()
+  @IsDateString()
   birth_date: Date
+
 }

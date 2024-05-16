@@ -7,10 +7,10 @@ import { ShelterModule } from './shelter/shelter.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GenderModule } from './gender/gender.module';
+import { AdoptionModule } from './adoption/adoption.module';
 
 @Module({
   imports: [
-    PetModule,
     TypeOrmModule.forRoot({
       type: "mysql",
       host: "localhost",
@@ -21,12 +21,14 @@ import { GenderModule } from './gender/gender.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    PetModule,
     BreedModule,
     SpecieModule,
     ShelterModule,
     UserModule,
     AuthModule,
     GenderModule,
+    AdoptionModule,
 
   ],
   controllers: [],

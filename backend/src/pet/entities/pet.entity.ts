@@ -1,7 +1,8 @@
+import { Adoption } from "src/adoption/entities/adoption.entity";
 import { Breed } from "src/breed/entities/breed.entity";
 import { Shelter } from "src/shelter/entities/shelter.entity";
 import { Specie } from "src/specie/entities/specie.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Pet {
@@ -31,4 +32,9 @@ export class Pet {
         eager: true
     })
     shelter: Shelter;
+
+    @OneToMany(()=>Adoption, (adoption)=> adoption.pet)
+    adoption: Adoption[]
+
+
 }

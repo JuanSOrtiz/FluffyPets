@@ -14,6 +14,6 @@ import { ShelterService } from 'src/shelter/shelter.service';
   imports: [TypeOrmModule.forFeature([Pet]), BreedModule, SpecieModule, ShelterModule],
   controllers: [PetController],
   providers: [PetService, BreedService, SpecieService, ShelterService],
-  exports: []
+  exports: [TypeOrmModule, PetService]
 })
 export class PetModule {}

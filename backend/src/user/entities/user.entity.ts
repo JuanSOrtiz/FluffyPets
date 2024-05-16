@@ -1,5 +1,6 @@
+import { Adoption } from "src/adoption/entities/adoption.entity";
 import { Gender } from "src/gender/entities/gender.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -25,4 +26,9 @@ export class User {
 
     @Column({default: "user"})
     role: string
+
+    @OneToMany(() => Adoption, (adoption) => adoption.user)
+    adoptions: Adoption[]
+
 }
+//

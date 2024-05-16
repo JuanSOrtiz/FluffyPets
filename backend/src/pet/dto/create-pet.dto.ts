@@ -1,4 +1,4 @@
-import { IsDate, IsOptional, IsString, MinLength } from "class-validator"
+import { IsDate, IsDateString, IsOptional, IsString, MinLength } from "class-validator"
 
 export class CreatePetDto {
 
@@ -12,7 +12,7 @@ export class CreatePetDto {
     @IsString()
     breed: string
 
-    @IsDate()
+    @IsDateString()
     birth_date: Date
 
     @IsString()
