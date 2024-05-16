@@ -4,7 +4,9 @@ import App from './App.jsx'
 import { Adoption } from './components/Adoption.jsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-
+import { UserProvider } from './UserContext.jsx'
+import Login from './components/Login.jsx'
+import Signup from './components/Signup.jsx'
 const router = createBrowserRouter([{
   path: '/',
   element: <App/>
@@ -13,11 +15,24 @@ const router = createBrowserRouter([{
   path: '/adopciones',
   element: <Adoption/>
 },
+{
+  path: '/login',
+  element: <Login/>
+},
+
+{
+  path: '/signup',
+  element: <Signup/>
+},
+
 
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+    
   </React.StrictMode>,
 )

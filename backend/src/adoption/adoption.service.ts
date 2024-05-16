@@ -44,7 +44,7 @@ export class AdoptionService {
       user,
     });
 
-    return console.log(adoption) //await this.adoptionRepository.save(adoption);
+    return await this.adoptionRepository.save(adoption) //await this.adoptionRepository.save(adoption);
   }
 
   async findAll() {

@@ -7,11 +7,11 @@ const Header = () => {
     <div className='ftco-navbar-light flex justify-between bg-white z-3 py-2 px-4 shadow-md md:relative md:top-0 md:py-2 md:px-6'>
       <img src={Logo} alt="Logo" className="h-14" />
       <div className='flex py-2 px-4'>
-        <NavItem href="/" text="Inicio" isActive={true} />
-        <NavItem href="/adopciones" text="Adopciones" isActive={false} />
-        <NavItem href="#" text="Productos" isActive={false} />
-        <NavItem href="#" text="Contacto" isActive={false} />
-        <NavItem href="#" text="Login" isActive={false} />
+        <Link to='/' className={`mx-16 font-semibold uppercase text-base  hover:text-green-500`} style={{paddingTop: '2.3rem', paddingBottom: '2.3rem', paddingLeft: '18px', paddingRight: '18px', fontWeight: '700', position: 'relative', opacity: '1'}} >Inicio</Link>
+        <Link to='/adopciones' className={`mx-16 font-semibold uppercase text-base  hover:text-green-500`} style={{paddingTop: '2.3rem', paddingBottom: '2.3rem', paddingLeft: '18px', paddingRight: '18px', fontWeight: '700', position: 'relative', opacity: '1'}}>Adopciones</Link>
+        <Link to='/' className={`mx-16 font-semibold uppercase text-base  hover:text-green-500`} style={{paddingTop: '2.3rem', paddingBottom: '2.3rem', paddingLeft: '18px', paddingRight: '18px', fontWeight: '700', position: 'relative', opacity: '1'}}>Productos</Link>
+        <Link to='/' className={`mx-16 font-semibold uppercase text-base  hover:text-green-500`} style={{paddingTop: '2.3rem', paddingBottom: '2.3rem', paddingLeft: '18px', paddingRight: '18px', fontWeight: '700', position: 'relative', opacity: '1'}}>Contacto</Link>
+        <Link to='/login' className={`mx-16 font-semibold uppercase text-base  hover:text-green-500`} style={{paddingTop: '2.3rem', paddingBottom: '2.3rem', paddingLeft: '18px', paddingRight: '18px', fontWeight: '700', position: 'relative', opacity: '1'}}>Login</Link>
       </div>
     </div>
   );

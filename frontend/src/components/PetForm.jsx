@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useUser } from '../UserContext';
 
 function PetForm() {
   const [name, setName] = useState('');
@@ -12,6 +13,7 @@ function PetForm() {
   const [pets, setPets] = useState([]);
   const [filePath, setFilePath] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +32,6 @@ function PetForm() {
         const shelterData = await shelterResponse.json();
         const petData = await petResponse.json();
 
-        console.log('Datos de mascotas recibidos:', petData); // Debug: Verificar estructura de datos
 
         // Mapear los datos de mascotas para incluir tanto el nombre como la URL de la imagen
         const mappedPets = petData.map(pet => ({
@@ -105,78 +106,84 @@ function PetForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-      <label>Nombre: </label>
-      <input
-      type="text"
-      value={name}
-      onChange={(e)=>setName(e.target.value)}
-      />
+      {user.role== 'admin'&&(
+        <form onSubmit={handleSubmit}>
+        <label>Nombre: </label>
+        <input
+        type="text"
+        value={name}
+        onChange={(e)=>setName(e.target.value)}
+        />
 
-      <label>Especie: </label>
-      <select 
-        name="specie" 
-        id="specie"
-        value={selectedSpecie}
-        onChange={(e)=>setSelectedSpecie(e.target.value)}
-      >
-        <option value="" disabled hidden>Selecciona una especie</option>
-        {specie.map((specie,index)=>(
-          <option key = {index} value={specie} >
-            {specie}
-          </option>
-        ))}
+        <label>Especie: </label>
+        <select 
+          name="specie" 
+          id="specie"
+          value={selectedSpecie}
+          onChange={(e)=>setSelectedSpecie(e.target.value)}
+        >
+          <option value="" disabled hidden>Selecciona una especie</option>
+          {specie.map((specie,index)=>(
+            <option key = {index} value={specie} >
+              {specie}
+            </option>
+          ))}
+          
+        </select>
+
+        <label>Raza: </label>
+        <select 
+          name="breed" 
+          id="breed"
+          value={selectedBreed}
+          onChange={(e)=>setSelectedBreed(e.target.value)}
+        >
+          <option value="" disabled hidden>Selecciona una especie</option>
+          {breed.map((breed,index)=>(
+            <option key = {index} value={breed} >
+              {breed}
+            </option>
+          ))}
+          
+        </select>
+
+        <label>Refugio: </label>
+        <select 
+          name="shelter" 
+          id="shelter"
+          value={selectedShelter}
+          onChange={(e)=>setSelectedShelter(e.target.value)}
+        >
+          <option value="" disabled hidden>Selecciona una especie</option>
+          {shelter.map((shelter,index)=>(
+            <option key = {index} value={shelter} >
+              {shelter}
+            </option>
+          ))}
+          
+        </select>
+
+        <label>Fecha de nacimiento: </label>
+        <input 
+        type="date"
+        value={birthDate}
+        onChange={(e)=>setBirthDate(e.target.value)} 
+        />
+
+        <label>Sube la imagen:</label>
+        <input
+          id='fileInput' 
+          type="file" 
+          onChange={handleFileChange}
+        />
+
+        <button type="submit">Enviar</button>
+        </form>
+
+      )}
         
-      </select>
 
-      <label>Raza: </label>
-      <select 
-        name="breed" 
-        id="breed"
-        value={selectedBreed}
-        onChange={(e)=>setSelectedBreed(e.target.value)}
-      >
-        <option value="" disabled hidden>Selecciona una especie</option>
-        {breed.map((breed,index)=>(
-          <option key = {index} value={breed} >
-            {breed}
-          </option>
-        ))}
-        
-      </select>
-
-      <label>Refugio: </label>
-      <select 
-        name="shelter" 
-        id="shelter"
-        value={selectedShelter}
-        onChange={(e)=>setSelectedShelter(e.target.value)}
-      >
-        <option value="" disabled hidden>Selecciona una especie</option>
-        {shelter.map((shelter,index)=>(
-          <option key = {index} value={shelter} >
-            {shelter}
-          </option>
-        ))}
-        
-      </select>
-
-      <label>Fecha de nacimiento: </label>
-      <input 
-      type="date"
-      value={birthDate}
-      onChange={(e)=>setBirthDate(e.target.value)} 
-      />
-
-      <label>Sube la imagen:</label>
-      <input
-        id='fileInput' 
-        type="file" 
-        onChange={handleFileChange}
-      />
-
-      <button type="submit">Enviar</button>
-      </form>
+      
     </>
   );
 }
