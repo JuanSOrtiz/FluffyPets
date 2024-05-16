@@ -8,6 +8,7 @@ export const Adoption = () => {
 
   const [pets, setPets] = useState([]);
   const { user } = useUser();
+  const [showModal, setShowModal] = useState(false);
 
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export const Adoption = () => {
     };
 
     fetchData();
-  }, []);
+  }, [pets]);
 
 
   const handleImageClick = async (petId) => {
@@ -83,21 +84,41 @@ export const Adoption = () => {
     }
   };
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleCreatePet = () => {
+    toggleModal();
+  };
+
   return (
     <>
-      <Header/>
-      <PetForm/>
-      <div>
-          <div>
-            <img src="src/assets/images/ternura.jpg"/>
-            <p>Mascota 1</p>
-          </div>
+        <Header />
+        {user.role === "admin" && (
+          <button onClick={handleCreatePet} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Añadir Mascota
+          </button>
+        )}
 
-          <div>
-            <img src="src/assets/images/hermoso.jpg"/>
-            <p>Mascota 2</p>
+        {showModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg p-8 max-w-md relative">
+              <span className="absolute top-0 right-0 text-xl cursor-pointer" onClick={toggleModal}>&times;</span>
+              <h2 className="text-2xl font-bold mb-4">Añadir una mascota</h2>
+              <PetForm />
+            </div>
           </div>
-      </div>
+        )}
+
+        <div className="grid grid-cols-3 gap-6 mt-8">
+          {pets.map(pet => (
+            <div key={pet.name} onClick={() => handleImageClick(pet.name)} className="cursor-pointer bg-green-300 rounded-lg overflow-hidden">
+              <img src={pet.imgUrl} alt={pet.name} className="w-full h-auto rounded-lg" style={{ height: "300px" }} />
+              <p className="text-center mt-2">{pet.name}</p>
+            </div>
+          ))}
+        </div>
 
       
     </>

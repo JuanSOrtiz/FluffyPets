@@ -98,7 +98,7 @@ function PetForm() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const fileName = file.name;
-    const newFilePath = "src/assets/" + fileName;
+    const newFilePath = "src/assets/images/" + fileName;
     setFilePath(newFilePath);
     setImgUrl(newFilePath);
 
@@ -107,78 +107,98 @@ function PetForm() {
   return (
     <>
       {user.role== 'admin'&&(
-        <form onSubmit={handleSubmit}>
-        <label>Nombre: </label>
-        <input
-        type="text"
-        value={name}
-        onChange={(e)=>setName(e.target.value)}
-        />
-
-        <label>Especie: </label>
-        <select 
-          name="specie" 
-          id="specie"
-          value={selectedSpecie}
-          onChange={(e)=>setSelectedSpecie(e.target.value)}
-        >
-          <option value="" disabled hidden>Selecciona una especie</option>
-          {specie.map((specie,index)=>(
-            <option key = {index} value={specie} >
-              {specie}
-            </option>
-          ))}
-          
-        </select>
-
-        <label>Raza: </label>
-        <select 
-          name="breed" 
-          id="breed"
-          value={selectedBreed}
-          onChange={(e)=>setSelectedBreed(e.target.value)}
-        >
-          <option value="" disabled hidden>Selecciona una especie</option>
-          {breed.map((breed,index)=>(
-            <option key = {index} value={breed} >
-              {breed}
-            </option>
-          ))}
-          
-        </select>
-
-        <label>Refugio: </label>
-        <select 
-          name="shelter" 
-          id="shelter"
-          value={selectedShelter}
-          onChange={(e)=>setSelectedShelter(e.target.value)}
-        >
-          <option value="" disabled hidden>Selecciona una especie</option>
-          {shelter.map((shelter,index)=>(
-            <option key = {index} value={shelter} >
-              {shelter}
-            </option>
-          ))}
-          
-        </select>
-
-        <label>Fecha de nacimiento: </label>
-        <input 
-        type="date"
-        value={birthDate}
-        onChange={(e)=>setBirthDate(e.target.value)} 
-        />
-
-        <label>Sube la imagen:</label>
-        <input
-          id='fileInput' 
-          type="file" 
-          onChange={handleFileChange}
-        />
-
-        <button type="submit">Enviar</button>
-        </form>
+        <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-gray-700 text-sm font-bold">Nombre:</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div>
+              <label htmlFor="specie" className="block text-gray-700 text-sm font-bold">Especie:</label>
+              <select
+                name="specie"
+                id="specie"
+                value={selectedSpecie}
+                onChange={(e) => setSelectedSpecie(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled hidden>Selecciona una especie</option>
+                {specie.map((specie, index) => (
+                  <option key={index} value={specie}>
+                    {specie}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="breed" className="block text-gray-700 text-sm font-bold">Raza:</label>
+              <select
+                name="breed"
+                id="breed"
+                value={selectedBreed}
+                onChange={(e) => setSelectedBreed(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled hidden>Selecciona una raza</option>
+                {breed.map((breed, index) => (
+                  <option key={index} value={breed}>
+                    {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="shelter" className="block text-gray-700 text-sm font-bold">Refugio:</label>
+              <select
+                name="shelter"
+                id="shelter"
+                value={selectedShelter}
+                onChange={(e) => setSelectedShelter(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled hidden>Selecciona un refugio</option>
+                {shelter.map((shelter, index) => (
+                  <option key={index} value={shelter}>
+                    {shelter}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="birthDate" className="block text-gray-700 text-sm font-bold">Fecha de nacimiento:</label>
+              <input
+                type="date"
+                id="birthDate"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div>
+              <label htmlFor="fileInput" className="block text-gray-700 text-sm font-bold">Sube la imagen:</label>
+              <input
+                id="fileInput"
+                type="file"
+                onChange={handleFileChange}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
 
       )}
         

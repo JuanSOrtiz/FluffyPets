@@ -71,38 +71,74 @@ const Signup = () => {
     }
   return (
     <>
-        <Header/>
+      <Header />
+      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
         <form onSubmit={handleSubmit}>
-            <label>Nombre: </label>
-            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
-
-            <label>Email: </label>
-            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-
-            <label>Password: </label>
-            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-
-            <label>Gender: </label>
-            <select 
-                name="gender" 
-                id="gender"
-                value={selectedGender}
-                onChange={(e)=>setSelectedGender(e.target.value)}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Nombre:</label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email:</label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password:</label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">Gender:</label>
+            <select
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="gender"
+              id="gender"
+              value={selectedGender}
+              onChange={(e) => setSelectedGender(e.target.value)}
             >
-                <option value="" disabled hidden>Selecciona género</option>
-                {gender.map((gender,index)=>(
-                <option key = {index} value={gender} >
-                    {gender}
+              <option value="" disabled hidden>Selecciona género</option>
+              {gender.map((gender, index) => (
+                <option key={index} value={gender}>
+                  {gender}
                 </option>
-                ))}
-                
+              ))}
             </select>
-
-            <label>Birth Date: </label>
-            <input type="date" value={birthDate} onChange={(e)=>setBirthDate(e.target.value)}/>
-            
-        <button type="submit">Enviar</button>
-      </form>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthDate">Birth Date:</label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="date"
+              id="birthDate"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            />
+          </div>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Enviar
+          </button>
+        </form>
+      </div>
     </>
   )
 }
