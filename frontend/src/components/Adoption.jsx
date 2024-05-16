@@ -1,7 +1,11 @@
 import React from 'react'
-
+import Header from './Header'
 export const Adoption = () => {
   return (
-    <div>Adoption</div>
+    <>
+      <Header/>
+      <div>Adoption</div>
+    </>
+    
   )
 }

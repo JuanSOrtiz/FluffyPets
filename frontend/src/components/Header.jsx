@@ -1,13 +1,14 @@
 import React from 'react';
 import Logo from '../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <div className='ftco-navbar-light flex justify-between bg-white z-3 py-2 px-4 shadow-md md:relative md:top-0 md:py-2 md:px-6'>
       <img src={Logo} alt="Logo" className="h-14" />
       <div className='flex py-2 px-4'>
-        <NavItem href="#" text="Inicio" isActive={true} />
-        <NavItem href="#" text="Adopciones" isActive={false} />
+        <NavItem href="/" text="Inicio" isActive={true} />
+        <NavItem href="/adopciones" text="Adopciones" isActive={false} />
         <NavItem href="#" text="Productos" isActive={false} />
         <NavItem href="#" text="Contacto" isActive={false} />
         <NavItem href="#" text="Login" isActive={false} />
