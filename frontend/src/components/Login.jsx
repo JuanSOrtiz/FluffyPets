@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import Header from './Header';
+import bgImage from '../assets/images/fondo.png';
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -49,7 +50,17 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}>
+
+      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md" style={{width: '90%', padding: '20px'}}>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email:</label>
@@ -85,6 +96,7 @@ const Login = () => {
           </Link>
         </form>
         {user.role && <p className="text-gray-700 mt-4">Rol del usuario: {user.role}</p>}
+      </div>
       </div>
     </>
   )
