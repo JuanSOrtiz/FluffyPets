@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Header from './Header';
 import bgImage from '../assets/images/fondo.png'
+import Footer from './Footer';
 
     
 const Signup = () => {
@@ -151,6 +152,10 @@ const Signup = () => {
         </form>
       </div>
     </div>
+
+    <Footer/>
+
+    
     </>
   )
 }

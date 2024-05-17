@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../UserContext';
 import Header from './Header';
 import bgImage from '../assets/images/fondo.png';
+import Footer from './Footer';
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -98,6 +99,8 @@ const Login = () => {
         {user.role && <p className="text-gray-700 mt-4">Rol del usuario: {user.role}</p>}
       </div>
       </div>
+
+      <Footer/>
     </>
   )
 }
