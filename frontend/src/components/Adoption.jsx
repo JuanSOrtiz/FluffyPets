@@ -9,19 +9,39 @@ export const Adoption = () => {
   const [pets, setPets] = useState([]);
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
+  const [species, setSpecies] = useState([]);
+  const [selectedSpecie, setSelectedSpecie] = useState('');
+
+  useEffect(() => {
+    const fetchSpecies = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/specie'); // Ajusta la URL según tu backend
+        if (!response.ok) {
+          throw new Error('No se pudieron obtener las especies');
+        }
+        const data = await response.json();
+        setSpecies(data);
+      } catch (error) {
+        console.error('Error al obtener las especies', error);
+      }
+    };
+
+    fetchSpecies();
+  }, []);
+
 
 
   useEffect(() => {
 
-    if (user && user.email) {
-      console.log('Usuario logueado:', user.email); // Verificar el correo del usuario
-    } else {
-      console.log('Usuario no logueado o sin correo'); // Caso en el que no haya usuario o correo
-    }
+    
     const fetchData = async () => {
       try {
+        let url = 'http://localhost:3000/pet';
+        if (selectedSpecie) {
+          url = `http://localhost:3000/pet/species/${selectedSpecie}`;
+        }
 
-        const petResponse = await fetch("http://localhost:3000/pet");
+        const petResponse = await fetch(url);
 
         if (!petResponse.ok) {
           throw new Error("No se pudieron obtener los datos");
@@ -43,7 +63,11 @@ export const Adoption = () => {
     };
 
     fetchData();
-  }, [pets]);
+  }, [pets, selectedSpecie]);
+
+  const handleSpecieChange = (event) => {
+    setSelectedSpecie(event.target.value);
+  };
 
 
   const handleImageClick = async (petId) => {
@@ -111,9 +135,19 @@ export const Adoption = () => {
           </div>
         )}
 
+        <div className="mt-4">
+          <label htmlFor="specie-select">Selecciona una especie:</label>
+          <select id="specie-select" onChange={handleSpecieChange} value={selectedSpecie} className="ml-2 p-2 border rounded">
+            <option value="">Todas</option>
+            {species.map(specie => (
+              <option key={specie.id} value={specie.id}>{specie.name}</option>
+            ))}
+          </select>
+        </div>
+
         <div className="grid grid-cols-3 gap-6 mt-8">
           {pets.map(pet => (
-            <div key={pet.name} onClick={() => handleImageClick(pet.name)} className="cursor-pointer bg-green-300 rounded-lg overflow-hidden">
+            <div key={pet.name} onClick={() => handleImageClick(pet.name)} className="cursor-pointer bg-white rounded-lg overflow-hidden">
               <img src={pet.imgUrl} alt={pet.name} className="w-full h-auto rounded-lg" style={{ height: "300px" }} />
               <p className="text-center mt-2">{pet.name}</p>
             </div>
