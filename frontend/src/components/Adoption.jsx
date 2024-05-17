@@ -9,8 +9,10 @@ export const Adoption = () => {
   const [pets, setPets] = useState([]);
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [species, setSpecies] = useState([]);
   const [selectedSpecie, setSelectedSpecie] = useState('');
+  const [selectedPet, setSelectedPet] = useState(null);
 
   useEffect(() => {
     const fetchSpecies = async () => {
@@ -52,7 +54,12 @@ export const Adoption = () => {
 
         // Mapear los datos de mascotas para incluir tanto el nombre como la URL de la imagen
         const mappedPets = petData.map(pet => ({
+          id: pet.id,
           name: pet.name,
+          birth_date: new Date(pet.birth_date).toLocaleDateString(),
+          breed: pet.breed.name,
+          specie: pet.specie.name,
+          shelter: pet.shelter.name,
           imgUrl: pet.image_url || 'src/assets/foto1.png'
         }));
 
@@ -70,9 +77,20 @@ export const Adoption = () => {
   };
 
 
-  const handleImageClick = async (petId) => {
+  const handleImageClick = (pet) => {
+    setSelectedPet(pet);
+    setShowModal(true);
+  };
+
+  const handleSubmitAdoption = async (petId) => {
 
     try {
+      if(!user.role){
+        alert("Debes loguearte primero")
+        return
+      }
+
+      console.log(petId)
       
       // Confirmar la acción con el usuario
       const confirmAction = window.confirm('¿Estás seguro de que quieres adoptar esta mascota?');
@@ -99,20 +117,33 @@ export const Adoption = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Error al guardar la adopción');
+        alert("Error al guardar la adopcion")
+        throw new Error('Error al guardar la adopción');   
       }
+      
+      setShowSuccessModal(true);
+   
 
-      console.log('Adopción guardada exitosamente');
     } catch (error) {
       console.error('Error al manejar el clic en la imagen:', error);
     }
+  }; 
+
+  const closeSuccessModal = () => {
+    setShowSuccessModal(false);
   };
+  
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
 
   const handleCreatePet = () => {
+    toggleModal();
+  };
+
+  const handleCloseModals = () => {
+    closeSuccessModal();
     toggleModal();
   };
 
@@ -135,6 +166,37 @@ export const Adoption = () => {
           </div>
         )}
 
+        {showModal && selectedPet && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg p-8 max-w-md relative">
+              <span className="absolute top-0 right-0 text-xl cursor-pointer" onClick={toggleModal}>&times;</span>
+              <h2 className="text-2xl font-bold mb-4">Información de la Mascota</h2>
+              <img src={selectedPet.imgUrl} alt={selectedPet.name} className="w-full h-auto rounded-lg" />
+              <p><strong>Nombre:</strong> {selectedPet.name}</p>
+              <p><strong>Fecha de Nacimiento:</strong> {selectedPet.birth_date}</p>
+              <p><strong>Raza:</strong> {selectedPet.breed}</p>
+              <p><strong>Especie:</strong> {selectedPet.specie}</p>
+              <p><strong>Refugio:</strong> {selectedPet.shelter}</p>
+              <button onClick={() => handleSubmitAdoption(selectedPet.name)} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Adoptar
+              </button>
+            </div>
+          </div>
+        )}
+
+        {showSuccessModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg p-8 max-w-md relative">
+              <span className="absolute top-0 right-0 text-xl cursor-pointer" onClick={closeSuccessModal}>&times;</span>
+              <h2 className="text-2xl font-bold mb-4">¡Adopción exitosa!</h2>
+              <p>Gracias por adoptar a {selectedPet.name}. Pronto nos pondremos en contacto contigo para completar el proceso.</p>
+              <button onClick={handleCloseModals} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="mt-4">
           <label htmlFor="specie-select">Selecciona una especie:</label>
           <select id="specie-select" onChange={handleSpecieChange} value={selectedSpecie} className="ml-2 p-2 border rounded">
@@ -147,7 +209,7 @@ export const Adoption = () => {
 
         <div className="grid grid-cols-3 gap-6 mt-8">
           {pets.map(pet => (
-            <div key={pet.name} onClick={() => handleImageClick(pet.name)} className="cursor-pointer bg-white rounded-lg overflow-hidden">
+            <div key={pet.name} onClick={() => handleImageClick(pet)} className="cursor-pointer bg-white rounded-lg overflow-hidden">
               <img src={pet.imgUrl} alt={pet.name} className="w-full h-auto rounded-lg" style={{ height: "300px" }} />
               <p className="text-center mt-2">{pet.name}</p>
             </div>
