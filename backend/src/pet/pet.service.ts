@@ -70,6 +70,13 @@ export class PetService {
     return await this.petRepository.findOneBy({id});
   }
 
+  async findBySpecie(specieId: number): Promise<Pet[]> {
+    return await this.petRepository.find({
+      where: { specie: { id: specieId } },
+      relations: ['breed', 'specie', 'shelter'],
+    });
+  }
+
   async update(id: number, updatePetDto: UpdatePetDto) {
     const pet = await this.petRepository.findOneBy({id})
 

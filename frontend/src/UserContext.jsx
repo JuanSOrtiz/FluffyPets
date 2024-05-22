@@ -7,8 +7,13 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({ role: '', name: '', email: '' });
 
+  const logout = () => {
+    // Eliminar los datos del usuario
+    setUser({ role: '', name: '', email: '' });
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, logout }}>
       {children}
     </UserContext.Provider>
   );

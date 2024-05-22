@@ -1,17 +1,20 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useUser } from '../UserContext';
 import Header from './Header';
 import bgImage from '../assets/images/fondo.png';
 import Footer from './Footer';
 
 const Login = () => {
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [role, setRole] = useState('')
     const [name, setName] = useState('')
     const { user, setUser } = useUser();
+    const [loggedIn, setLoggedIn] = useState(false);
 
 
     const handleSubmit = async (e) =>{
@@ -35,12 +38,15 @@ const Login = () => {
             const userData = await userResponse.json()
 
             if (!response.ok) {
+                alert("Correo o contraseña incorrectos")
                 throw new Error("Error al enviar el formulario");
             }
             else{
                 setUser({ role: userData.role, name: userData.name, email: userData.email });
                 setEmail('');
                 setPassword('');
+                setLoggedIn(true);
+                navigate('/');
             }
       } catch (error) {
             setPassword('');
@@ -48,6 +54,8 @@ const Login = () => {
       }
 
     }
+  
+   
   return (
     <>
       <Header />
@@ -97,6 +105,7 @@ const Login = () => {
           </Link>
         </form>
         {user.role && <p className="text-gray-700 mt-4">Rol del usuario: {user.role}</p>}
+        {loggedIn && <Redirect to="/" />}
       </div>
       </div>
 

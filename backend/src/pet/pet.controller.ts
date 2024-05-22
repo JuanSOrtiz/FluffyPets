@@ -22,6 +22,12 @@ export class PetController {
     return this.petService.findOne(+id);
   }
 
+  @Get('species/:specieId')
+  findBySpecie(@Param('specieId') specieId: string) {
+    return this.petService.findBySpecie(+specieId);
+  }
+
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
     return this.petService.update(+id, updatePetDto);
