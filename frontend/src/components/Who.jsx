@@ -19,6 +19,14 @@ const Who = () => {
             <div className="heading-section text-center">
               <h2 className="mb-4 font-bold text-2xl md:text-3xl">¿Quiénes somos?</h2>
             </div>
+            <div className="description-section text-center mb-4">
+              <p className="text-lg md:text-xl">
+                Somos una organización dedicada a conectar mascotas necesitadas con hogares amorosos. 
+                Nuestra misión es proporcionar una segunda oportunidad a estos animales, brindando apoyo y 
+                recursos a las familias adoptivas. Creemos en el poder transformador de la adopción y nos 
+                esforzamos por hacer el proceso lo más fácil y gratificante posible.
+              </p>
+            </div>
             <div className="row">
               <div className="col-md-6 services-2 flex flex-col items-center">
                 <div className="icon bg-green-500 rounded-full w-20 h-20 shadow-md relative flex items-center justify-center mb-4">
@@ -54,7 +62,6 @@ const Who = () => {
     </section>
   );
 }
-
 
 export default Who;
 

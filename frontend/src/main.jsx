@@ -7,6 +7,9 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import { UserProvider } from './UserContext.jsx'
 import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
+import AdoptionAdmin from './components/AdoptionAdmin.jsx'
+
+
 const router = createBrowserRouter([{
   path: '/',
   element: <App/>
@@ -23,6 +26,11 @@ const router = createBrowserRouter([{
 {
   path: '/signup',
   element: <Signup/>
+},
+
+{
+  path: '/see-Adoption',
+  element: <AdoptionAdmin/>
 },
 
 

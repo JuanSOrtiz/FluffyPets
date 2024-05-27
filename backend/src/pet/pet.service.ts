@@ -7,6 +7,7 @@ import { Pet } from './entities/pet.entity';
 import { Breed } from 'src/breed/entities/breed.entity';
 import { Specie } from 'src/specie/entities/specie.entity';
 import { Shelter } from 'src/shelter/entities/shelter.entity';
+import { AnimalSex } from 'src/animal_sex/entities/animal_sex.entity';
 
 @Injectable()
 export class PetService {
@@ -24,6 +25,9 @@ export class PetService {
     @InjectRepository(Shelter)
     private shelterRepository: Repository<Shelter>,
 
+    @InjectRepository(AnimalSex)
+    private animalSexRepository: Repository<AnimalSex>,
+
   ){}
 
   async create(createPetDto: CreatePetDto) {
@@ -39,6 +43,10 @@ export class PetService {
       name: createPetDto.shelter
     })
 
+    const animal_sex = await this.animalSexRepository.findOneBy({
+      name: createPetDto.animal_sex
+    })
+
     if(!breed){
       throw new BadRequestException('Breed not found')
     }
@@ -51,13 +59,19 @@ export class PetService {
       throw new BadRequestException('Shelter not found')
     }
 
+    if(!animal_sex){
+      throw new BadRequestException('Animal sex not found')
+    }
+
     const pet= this.petRepository.create({
       name: createPetDto.name,
       birth_date: createPetDto.birth_date,
       image_url: createPetDto.image_url,
+      state: createPetDto.state,
       breed,
       specie,
-      shelter
+      shelter,
+      animal_sex
     })
     return await this.petRepository.save(pet);
   }
@@ -76,6 +90,16 @@ export class PetService {
       relations: ['breed', 'specie', 'shelter'],
     });
   }
+  async findByState(state: boolean): Promise<Pet[]> {
+    return await this.petRepository.find({ where: { state } });
+  }
+
+  async findBySpecieAndState(specieId: number, state: boolean): Promise<Pet[]> {
+    return await this.petRepository.find({
+      where: { specie: { id: specieId }, state },
+      relations: ['breed', 'specie', 'shelter'],
+    });
+  }
 
   async update(id: number, updatePetDto: UpdatePetDto) {
     const pet = await this.petRepository.findOneBy({id})
@@ -87,6 +111,7 @@ export class PetService {
     let breed;
     let specie;
     let shelter;
+    let animal_sex;
 
     if(updatePetDto.breed){
       breed = await this.breedRepository.findOneBy({
@@ -117,13 +142,23 @@ export class PetService {
         throw new BadRequestException('Shelter not found')
       }
     }
+    
+    if(updatePetDto.animal_sex){
+      animal_sex = await this.animalSexRepository.findOneBy({
+        name: updatePetDto.animal_sex
+      })
 
+      if(!animal_sex){
+        throw new BadRequestException('Animal sex not found')
+      }
+    }
     return await this.petRepository.save({
       ...pet,
       ...updatePetDto,
       breed,
       specie,
-      shelter
+      shelter,
+      animal_sex
     })
   }
 

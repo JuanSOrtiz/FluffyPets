@@ -27,6 +27,16 @@ export class PetController {
     return this.petService.findBySpecie(+specieId);
   }
 
+  @Get('state/:state')
+  findByState(@Param('state') state: boolean) {
+    return this.petService.findByState(state);
+  }
+
+  @Get('species/:specieId/state/:state')
+  findBySpecieAndState(@Param('specieId') specieId: number, @Param('state') state: boolean) {
+    return this.petService.findBySpecieAndState(specieId, state);
+  }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {

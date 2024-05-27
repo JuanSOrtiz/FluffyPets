@@ -8,6 +8,9 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GenderModule } from './gender/gender.module';
 import { AdoptionModule } from './adoption/adoption.module';
+import { AdoptionStatusModule } from './adoption_status/adoption_status.module';
+import { AdoptionCommentaryModule } from './adoption_commentary/adoption_commentary.module';
+import { AnimalSexModule } from './animal_sex/animal_sex.module';
 
 @Module({
   imports: [
@@ -29,6 +32,9 @@ import { AdoptionModule } from './adoption/adoption.module';
     AuthModule,
     GenderModule,
     AdoptionModule,
+    AdoptionStatusModule,
+    AdoptionCommentaryModule,
+    AnimalSexModule,
 
   ],
   controllers: [],

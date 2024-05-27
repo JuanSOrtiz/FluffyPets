@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsOptional, IsString, MinLength } from "class-validator"
+import { IsBoolean, IsDate, IsDateString, IsOptional, IsString, MinLength } from "class-validator"
 
 export class CreatePetDto {
 
@@ -19,7 +19,13 @@ export class CreatePetDto {
     @IsOptional()
     image_url?: string
 
+    @IsBoolean()
+    state: boolean
+
     @IsString()
     shelter: string
+
+    @IsString()
+    animal_sex: string
 
 }

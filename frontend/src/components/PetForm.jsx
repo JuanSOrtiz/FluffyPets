@@ -62,7 +62,8 @@ function PetForm() {
         breed: selectedBreed,
         shelter: selectedShelter,
         birth_date: birthDate,
-        image_url: imgUrl
+        image_url: imgUrl,
+        state: false
       };
 
       const response = await fetch("http://localhost:3000/pet", {
@@ -98,7 +99,7 @@ function PetForm() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const fileName = file.name;
-    const newFilePath = "src/assets/images/" + fileName;
+    const newFilePath = "src/assets/images/imgpets/" + fileName;
     setFilePath(newFilePath);
     setImgUrl(newFilePath);
 

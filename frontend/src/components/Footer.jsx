@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="footer-item">
-            <h2 className="footer-heading text-xl mb-6 font-bold">Petsitting</h2>
+            <h2 className="footer-heading text-xl mb-6 font-bold">Fluffy Pets</h2>
             <p className="mb-6">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
             <ul className="ftco-footer-social p-0 flex gap-3">
               <li className="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="WhatsApp"><FontAwesomeIcon icon={faWhatsapp} className="text-xl" /></a></li>
