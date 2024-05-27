@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../assets/images/amor.jpg';
+import backgroundImage from '../assets/images/portada.png';
 
 const HeroSection = () => {
   return (
@@ -8,8 +8,10 @@ const HeroSection = () => {
       <div className="container">
         <div className="row no-gutters slider-text h-full justify-content-center items-center" data-scrollax-parent="true">
           <div className="col-md-11 text-center">
-            <h1 className="mb-4 text-black text-5xl lg:text-4xl md:text-3xl font-semibold leading-tight">¡Encuentra a tu mejor amigo hoy y cambia una vida para siempre!</h1>
-            <p><a href="#" className="btn btn-primary mr-4 py-3 px-4"> <span className="ion-ios-arrow-forward"></span></a></p>
+
+            {/*<h1 className="mb-4 text-white text-5xl lg:text-4xl md:text-3xl font-semibold leading-tight">Highest Quality Care For Pets You'll Love</h1> */}
+            {/*<p><a href="#" className="btn btn-primary mr-4 py-3 px-4">Learn more <span className="ion-ios-arrow-forward"></span></a></p> */}
+
           </div>
         </div>
       </div>
