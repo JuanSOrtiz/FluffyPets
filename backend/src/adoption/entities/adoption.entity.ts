@@ -24,6 +24,24 @@ export class Adoption {
     @Column()
     adoption_date: Date;
 
+    @Column()
+    cellphone_number: String;
+
+    @Column()
+    address: String;
+
+    @Column()
+    neighborhood: String;
+
+    @Column()
+    live_with_quant: Number;
+
+    @Column()
+    own_house: Boolean;
+
+    @Column()
+    responsibility: Boolean;
+
     @ManyToOne(()=>AdoptionStatus, (adoption_status)=>adoption_status.adoption,{
         eager:true
     })

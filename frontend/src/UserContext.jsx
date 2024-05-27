@@ -5,11 +5,11 @@ const UserContext = createContext();
 
 // Crear un proveedor de contexto
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ role: '', name: '', email: '' });
+  const [user, setUser] = useState({role: '', name: '', email: '' });
 
   const logout = () => {
     // Eliminar los datos del usuario
-    setUser({ role: '', name: '', email: '' });
+    setUser({role: '', name: '', email: '' });
   };
 
   return (

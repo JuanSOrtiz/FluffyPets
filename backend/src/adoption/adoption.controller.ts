@@ -22,6 +22,17 @@ export class AdoptionController {
     return this.adoptionService.findOne(+id);
   }
 
+  @Get('user/:userEmail')
+  async findByUser(@Param('userEmail') userEmail: string) {
+    return this.adoptionService.findByUser(userEmail);
+  }
+
+  @Get('adoption-status/:statusName')
+  async findByStatus(@Param('statusName') statusName: string) {
+    return this.adoptionService.findByStatus(statusName);
+  }
+
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAdoptionDto: UpdateAdoptionDto) {
     return this.adoptionService.update(+id, updateAdoptionDto);

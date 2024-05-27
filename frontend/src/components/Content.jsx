@@ -24,8 +24,8 @@ const Content = () => {
               <img src={ProductoIcon} alt="Producto Icon" className="w-16 h-16" /> 
             </div>
             <div className="text-center mb-6">
-              <h3 className="font-semibold text-xl">Productos</h3>
-              <p className="text-gray-700 mb-4">Ofrecemos una amplia gama de productos de alta calidad para mascotas, desde alimentos nutritivos y juguetes divertidos hasta accesorios cómodos y seguros. Todo lo que necesitas para mantener a tu compañero feliz y saludable, en un solo lugar.</p>
+              <h3 className="font-semibold text-xl">Contáctanos</h3>
+              <p className="text-gray-700 mb-4">Cambiar texto</p>
               <a href="/" className="btn-custom inline-flex items-center justify-center bg-green-500 text-white rounded-full w-12 h-12 shadow-md transition duration-300 hover:bg-white hover:text-green-500"><FontAwesomeIcon icon={faChevronRight} /></a>
             </div>
           </div>  

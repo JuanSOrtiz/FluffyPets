@@ -22,7 +22,6 @@ const Footer = () => {
             <ul className="list-none">
               <li><a href="#" className="py-2 block hover:text-green-500">Inicio</a></li>
               <li><a href="#" className="py-2 block hover:text-green-500">Adopciones</a></li>
-              <li><a href="#" className="py-2 block hover:text-green-500">Productos</a></li>
               <li><a href="#" className="py-2 block hover:text-green-500">Contacto</a></li>
             </ul>
           </div>

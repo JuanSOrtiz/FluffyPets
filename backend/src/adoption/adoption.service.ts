@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAdoptionDto } from './dto/create-adoption.dto';
 import { UpdateAdoptionDto } from './dto/update-adoption.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -55,6 +55,12 @@ export class AdoptionService {
 
     const adoption = this.adoptionRepository.create({
       adoption_date: createAdoptionDto.adoption_date,
+      cellphone_number: createAdoptionDto.cellphone_number,
+      address: createAdoptionDto.address,
+      neighborhood: createAdoptionDto.neighborhood,
+      live_with_quant:createAdoptionDto.live_with_quant,
+      own_house:createAdoptionDto.own_house,
+      responsibility:createAdoptionDto.responsibility,
       pet,
       user,
       adoption_status,
@@ -72,9 +78,74 @@ export class AdoptionService {
     return await this.adoptionRepository.findOneBy({id});
   }
 
-  async update(id: number, updateAdoptionDto: UpdateAdoptionDto) {
-    return `This action updates a #${id} adoption`;
+  async findByUser(userEmail: string): Promise<Adoption[]> {
+    return await this.adoptionRepository.find({
+      where: { user: { email: userEmail } }, // Filtrar por correo electrónico del usuario
+      relations: ['pet', 'user', 'adoption_status'],
+    });
   }
+
+  async findByStatus(statusName: string): Promise<Adoption[]> {
+    return await this.adoptionRepository.find({
+      where: {adoption_status:{name: statusName}},
+      relations:['pet', 'user', 'adoption_status']
+    })
+  }
+
+  
+
+  async update(id: number, updateAdoptionDto: UpdateAdoptionDto) {
+    const adoption = await this.adoptionRepository.findOneBy({id})
+
+    if (!adoption){
+      throw new BadRequestException('Adoption not found')
+    }
+
+    let pet;
+    let user;
+    let adoption_status;
+
+    if(updateAdoptionDto.pet){
+      pet = await this.petRepository.findOneBy({
+        name: updateAdoptionDto.pet
+      })
+
+      if(!pet){
+        throw new BadRequestException('Pet not found')
+      }
+    }
+
+    if(updateAdoptionDto.user){
+      user = await this.userRepository.findOneBy({
+        email: updateAdoptionDto.user
+      })
+
+      if(!user){
+        throw new BadRequestException('User not found')
+      }
+    }
+
+    if(updateAdoptionDto.adoption_status){
+      adoption_status = await this.adoptionStatusRepository.findOneBy({
+        name: updateAdoptionDto.adoption_status
+      })
+
+      if(!adoption_status){
+        throw new BadRequestException('Adoption status not found')
+      }
+    }
+
+    return await this.adoptionRepository.save({
+      ...adoption,
+      ...updateAdoptionDto,
+      pet,
+      user,
+      adoption_status
+
+    })
+
+}
+
 
   async remove(id: number) {
     return await this.adoptionRepository.delete({id});

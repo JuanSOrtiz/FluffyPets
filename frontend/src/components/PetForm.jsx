@@ -5,9 +5,11 @@ function PetForm() {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [breed, setBreed] = useState([]);
+  const [sex, setSex] = useState([]);
   const [specie, setSpecie] = useState([]);
   const [shelter, setShelter] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState('');
+  const [selectedSex, setSelectedSex] = useState('');
   const [selectedSpecie, setSelectedSpecie] = useState('');
   const [selectedShelter, setSelectedShelter] = useState('');
   const [pets, setPets] = useState([]);
@@ -15,43 +17,47 @@ function PetForm() {
   const [imgUrl, setImgUrl] = useState('');
   const { user } = useUser();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const breedResponse = await fetch("http://localhost:3000/breed");
-        const specieResponse = await fetch("http://localhost:3000/specie");
-        const shelterResponse = await fetch("http://localhost:3000/shelter");
-        const petResponse = await fetch("http://localhost:3000/pet");
 
-        if (!breedResponse.ok || !specieResponse.ok || !shelterResponse.ok || !petResponse.ok) {
-          throw new Error("No se pudieron obtener los datos");
-        }
+  const fetchData = async () => {
+    try {
+      const breedResponse = await fetch("http://localhost:3000/breed");
+      const sexResponse = await fetch("http://localhost:3000/animal-sex");
+      const specieResponse = await fetch("http://localhost:3000/specie");
+      const shelterResponse = await fetch("http://localhost:3000/shelter");
+      const petResponse = await fetch("http://localhost:3000/pet");
 
-        const breedData = await breedResponse.json();
-        const specieData = await specieResponse.json();
-        const shelterData = await shelterResponse.json();
-        const petData = await petResponse.json();
-
-
-        // Mapear los datos de mascotas para incluir tanto el nombre como la URL de la imagen
-        const mappedPets = petData.map(pet => ({
-          name: pet.name,
-          imgUrl: pet.image_url || 'src/assets/foto1.png'
-        }));
-
-        setBreed(breedData.map(item => item.name));
-        setSpecie(specieData.map(item => item.name));
-        setShelter(shelterData.map(item => item.name));
-        setPets(mappedPets);
-      } catch (error) {
-        console.error("Error al obtener los datos", error);
+      if (!breedResponse.ok || !sexResponse.ok || !specieResponse.ok || !shelterResponse.ok || !petResponse.ok) {
+        throw new Error("No se pudieron obtener los datos");
       }
-    };
 
-    fetchData();
-  }, [name, birthDate, selectedSpecie, selectedBreed, selectedShelter, imgUrl]);
+      const breedData = await breedResponse.json();
+      const sexData = await sexResponse.json();
+      const specieData = await specieResponse.json();
+      const shelterData = await shelterResponse.json();
+      const petData = await petResponse.json();
 
 
+      // Mapear los datos de mascotas para incluir tanto el nombre como la URL de la imagen
+      const mappedPets = petData.map(pet => ({
+        name: pet.name,
+        imgUrl: pet.image_url || 'src/assets/foto1.png'
+      }));
+
+      setBreed(breedData.map(item => item.name));
+      setSex(sexData.map(item => item.name));
+      setSpecie(specieData.map(item => item.name));
+      setShelter(shelterData.map(item => item.name));
+      setPets(mappedPets);
+    } catch (error) {
+      console.error("Error al obtener los datos", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData()
+  },[name, birthDate, selectedSpecie, selectedBreed, selectedShelter, imgUrl, selectedSex])
+
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,6 +66,7 @@ function PetForm() {
         name: name,
         specie: selectedSpecie,
         breed: selectedBreed,
+        animal_sex: selectedSex,
         shelter: selectedShelter,
         birth_date: birthDate,
         image_url: imgUrl,
@@ -81,12 +88,13 @@ function PetForm() {
       setName('');
       setBirthDate('');
       setSelectedSpecie('');
+      setSelectedSex('')
       setSelectedBreed('');
       setSelectedShelter('');
       document.getElementById("fileInput").value = null
 
       fetchData();
-
+      
 
     } catch (error) {
       console.error("Error al enviar el formulario", error);
@@ -150,6 +158,23 @@ function PetForm() {
                 {breed.map((breed, index) => (
                   <option key={index} value={breed}>
                     {breed}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="sex" className="block text-gray-700 text-sm font-bold">Sexo:</label>
+              <select
+                name="sex"
+                id="sex"
+                value={selectedSex}
+                onChange={(e) => setSelectedSex(e.target.value)}
+                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="" disabled hidden>Selecciona el sexo</option>
+                {sex.map((sex, index) => (
+                  <option key={index} value={sex}>
+                    {sex}
                   </option>
                 ))}
               </select>

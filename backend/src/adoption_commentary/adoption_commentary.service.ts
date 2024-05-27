@@ -37,10 +37,23 @@ export class AdoptionCommentaryService {
     
   }
 
-  async findAll() {
+  async findAll(){
     return await this.adoptionCommentaryRepository.find();
   }
 
+  async findByAdoption(adoptionId: number): Promise<AdoptionCommentary[]> {
+    return await this.adoptionCommentaryRepository.find({
+      where: { adoption: { id: adoptionId } },
+      relations: ['adoption'],
+    });
+  }
+
+  async findByUser(userEmail: string): Promise<Adoption[]> {
+    return await this.adoptionRepository.find({
+      where: { user: { email: userEmail } }, // Filtrar por correo electrónico del usuario
+      relations: ['pet', 'user', 'adoption_status'],
+    });
+  }
 
   async remove(id: number) {
     return await this.adoptionCommentaryRepository.delete({id});

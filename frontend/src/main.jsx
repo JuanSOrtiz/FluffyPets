@@ -8,6 +8,7 @@ import { UserProvider } from './UserContext.jsx'
 import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
 import AdoptionAdmin from './components/AdoptionAdmin.jsx'
+import Profile from './components/Profile.jsx'
 
 
 const router = createBrowserRouter([{
@@ -31,6 +32,11 @@ const router = createBrowserRouter([{
 {
   path: '/see-Adoption',
   element: <AdoptionAdmin/>
+},
+
+{
+  path: '/profile',
+  element: <Profile/>
 },
 
 
