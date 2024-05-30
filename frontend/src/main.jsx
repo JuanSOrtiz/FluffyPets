@@ -9,6 +9,7 @@ import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
 import AdoptionAdmin from './components/AdoptionAdmin.jsx'
 import Profile from './components/Profile.jsx'
+import { Contact } from './components/Contact.jsx'
 
 
 const router = createBrowserRouter([{
@@ -20,10 +21,13 @@ const router = createBrowserRouter([{
   element: <Adoption/>
 },
 {
+  path: '/contacto',
+  element: <Contact/>
+},
+{
   path: '/login',
   element: <Login/>
 },
-
 {
   path: '/signup',
   element: <Signup/>

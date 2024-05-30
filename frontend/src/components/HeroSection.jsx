@@ -4,7 +4,7 @@ import backgroundImage from '../assets/images/portada.png';
 const HeroSection = () => {
   return (
     <div className="hero-wrap h-screen relative overflow-hidden bg-cover bg-center flex items-center justify-center" style={{backgroundImage: `url(${backgroundImage})`}} data-stellar-background-ratio="0.5">
-      <div className="overlay absolute top-0 left-0 right-0 bottom-0 opacity-10 bg-black"></div>
+      <div className="overlay absolute top-0 left-0 right-0 bottom-0"></div>
       <div className="container">
         <div className="row no-gutters slider-text h-full justify-content-center items-center" data-scrollax-parent="true">
           <div className="col-md-11 text-center">
