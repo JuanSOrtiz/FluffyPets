@@ -34,8 +34,8 @@ const Footer = () => {
             <h2 className="footer-heading text-xl mb-6 font-bold">¿Tienes preguntas?</h2>
             <ul className="list-none">
               <li className="mb-2"><span className="icon"><FontAwesomeIcon icon={faMapMarkerAlt} className="text-xl mr-2" /></span><span className="text">Vereda Los Pinos, finca 98, Rionegro, Antioquia</span></li>
-              <li className="mb-2"><a href="#"><span className="icon"><FontAwesomeIcon icon={faPhone} className="text-xl mr-2" /></span><span className="text">+57 304 571 7747</span></a></li>
-              <li><a href="#"><span className="icon"><FontAwesomeIcon icon={faEnvelope} className="text-xl mr-2" /></span><span className="text">Fluffypets@gmail.com</span></a></li>
+              <li className="mb-2"><span className="icon"><FontAwesomeIcon icon={faPhone} className="text-xl mr-2" /></span><span className="text">+57 304 571 7747</span></li>
+              <li><span className="icon"><FontAwesomeIcon icon={faEnvelope} className="text-xl mr-2" /></span><span className="text">Fluffypets@gmail.com</span></li>
             </ul>
           </div>
         </div>
