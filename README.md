@@ -15,5 +15,7 @@ Para utilizar fluffy pets deberás cumplir con las siguientes condiciones
 Primero, clona este repositorio en tu máquina local:
 
 ```sh
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/JuanSOrtiz/FinalMascotas.git
+cd FinalMascotas
+
+Texto normal?
