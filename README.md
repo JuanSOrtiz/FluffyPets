@@ -1,3 +1,6 @@
+![Pantallazo de mi aplicación]([https://github.com/usuario/repositorio/blob/main/captura.png](https://github.com/JuanSOrtiz/FinalMascotas/blob/main/mascota%20image.jfif))
+
+
 # Fluffy pets project
 
 Para utilizar fluffy pets deberás cumplir con las siguientes condiciones
