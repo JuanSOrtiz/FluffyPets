@@ -1,4 +1,4 @@
-![Pantallazo de mi aplicación]([https://github.com/usuario/repositorio/blob/main/captura.png](https://github.com/JuanSOrtiz/FinalMascotas/blob/main/mascota%20image.jfif))
+![Pantallazo de mi aplicación](https://github.com/JuanSOrtiz/FinalMascotas/blob/main/pantallazo.png)
 
 
 # Fluffy pets project
